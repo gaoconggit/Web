@@ -1,0 +1,14 @@
+ public ActionResult Clear()
+        {
+
+            if (Request.Cookies["user"] != null)
+            {
+                HttpCookie hc = Request.Cookies["user"];
+                hc.Expires = DateTime.Now.AddDays(-1);
+                Response.AppendCookie(hc);
+                Session.Remove("name");
+                Session.Abandon();
+                Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+            }
+            return Content("T");
+        }
